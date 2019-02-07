@@ -8,6 +8,7 @@ brew "coreutils"
 brew "ctags"
 brew "curl"
 brew "diffutils"
+brew "direnv"
 brew "findutils", args: ["with-default-names"]
 brew "fish"
 brew "fzf"

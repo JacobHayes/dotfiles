@@ -28,3 +28,5 @@ if test -e /usr/local/opt/fzf/shell/key-bindings.fish
     source /usr/local/opt/fzf/shell/key-bindings.fish
     fzf_key_bindings
 end
+
+eval (direnv hook fish)
