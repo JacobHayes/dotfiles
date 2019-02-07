@@ -1,7 +1,4 @@
-function _set_tmuxpwd --on-variable PWD --description "Set a pane specific tmux PWD var to use when creating new panes/windows."
-    if status --is-command-substitution
-        return
-    end
+function _set_tmuxpwd --on-event fish_prompt --description "Set a pane specific tmux PWD var to use when creating new panes/windows."
     # tmux's pane_current_path doesn't work reliably with fish 3, so we'll set this var for each pane and reference that
     # in ~/.tmux.conf.
     if set -q TMUX
