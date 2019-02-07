@@ -51,6 +51,7 @@ Plug 'tpope/vim-commentary' " Auto comment line (gcc) or visual block (gc)
 Plug 'tpope/vim-repeat' " allows plugin actions to be repeated as a whole with '.' instad of last native action
 Plug 'tpope/vim-sensible' " some sensible vim defaults, though I think most are overwritten below.
 Plug 'tpope/vim-sleuth' " Auto detect space/indent
+Plug 'tpope/vim-surround' "Surround text v(highlight)S<character>
 Plug 'vim-airline/vim-airline-themes' " Use Solarized Light theme for statusline
 Plug 'w0rp/ale' " async linting, etc
 Plug 'zchee/deoplete-go', { 'do': 'make' } " async go completion
