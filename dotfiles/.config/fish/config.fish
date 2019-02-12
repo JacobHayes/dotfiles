@@ -7,7 +7,7 @@ set -x GO111MODULE on
 set -x GOPATH $HOME
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-set -x PAGER "/usr/bin/less -S" # Don't wrap when paging, in eg: psql
+set -x PAGER "/usr/bin/less -SR" # Don't wrap when paging, in eg: psql. Also, show color codes
 set -x PYTHONDONTWRITEBYTECODE 1
 set PATH $GOPATH/bin /usr/local/opt/curl/bin $PATH
 
