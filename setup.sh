@@ -35,6 +35,7 @@ chsh -s /usr/local/bin/fish
 
 if hash gcloud 2>/dev/null; then
     echo 'y' | gcloud components install docker-credential-gcr
+    /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/docker-credential-gcr configure-docker
 fi
 
 ./macos_settings.sh

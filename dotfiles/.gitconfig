@@ -24,7 +24,6 @@
   autosetuprebase = always
 [core]
   autocrlf = input
-  editor = vim
   excludesfile = /Users/jacobhayes/.gitignore_global
 [credential]
   helper = osxkeychain

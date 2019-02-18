@@ -4,8 +4,10 @@ flake8
 isort
 jedi
 mccabe
-neovim
+pep8
 pipenv
+poetry
 pycodestyle
 pyflakes
 pylint
+pynvim
