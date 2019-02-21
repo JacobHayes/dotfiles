@@ -57,6 +57,8 @@ defaults write -g AppleShowScrollBars -string 'WhenScrolling'
 defaults write -g AppleTemperatureUnit -string 'Celsius'
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 2
+defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
+defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write -g NSWindowResizeTime -float 0.0
 defaults write -g com.apple.springing.delay -float 0.5
@@ -153,6 +155,9 @@ defaults -currentHost write -g com.apple.keyboard.modifiermapping.6127-24648-0 -
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771303</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771298</integer></dict>'
 # Enable Night Shift
 sudo /usr/libexec/PlistBuddy -c "Set :CBUser-$(dscl . -read "${HOME}" GeneratedUID | sed 's/GeneratedUID: //'):CBBlueReductionStatus:BlueReductionMode 1" /private/var/root/Library/Preferences/com.apple.CoreBrightness.plist
+# Remove text replacements
+HOST_UUID="$(ioreg -rd1 -c IOPlatformExpertDevice | grep -E '(UUID)' | awk '{print $3}' | tr -d \")"
+sqlite3 "${HOME}/Library/Dictionaries/CoreDataUbiquitySupport/${USER}~${HOST_UUID}/UserDictionary/local/store/UserDictionary.db" 'delete from ZUSERDICTIONARYENTRY;'
 
 for app in "Dock" "Finder" "SystemUIServer" "cfprefsd" "corebrightnessd"; do
   killall "${app}" > /dev/null 2>&1
