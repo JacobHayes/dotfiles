@@ -95,6 +95,11 @@ set visualbell " don't beep, ex when hitting escape in command mode
 autocmd bufreadpre *.md setlocal conceallevel=0 " Don't hide syntax symbols like _
 autocmd bufreadpre *.py setlocal textwidth=88 " Match Black config
 
+" H/L for faster ^/$
+noremap H <home>
+vnoremap H <home>
+noremap L <end>
+vnoremap L <end>
 " faster quit, write, and exit
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
