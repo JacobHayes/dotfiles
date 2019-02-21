@@ -2,18 +2,19 @@
   "Profiles": [
     {
       "Allow Title Setting": false,
-      "Guid": "11C136CB-14D8-4B71-B67E-31506417C2FE",
+      "Guid": "BASEZZZZ-14D8-4B71-B67E-31506417C2FE",
       "Initial Text": "_iterm2_hook",
       "Name": "base",
       "Non Ascii Font": "Inconsolata-Regular 10",
       "Normal Font": "Inconsolata-Regular 10",
       "Scrollback Lines": 0,
       "Sync Title": false,
-      "Unlimited Scrollback": true
+      "Unlimited Scrollback": true,
+      "Window Type" : 12
     },
     {
       "Dynamic Profile Parent Name": "base",
-      "Guid": "2AE2AB65-51BB-4654-9E04-B6876D3A57E5",
+      "Guid": "DARKZZZZ-51BB-4654-9E04-B6876D3A57E5",
       "Name": "dark",
       "Ansi 0 Color": {
         "Blue Component": 0.1937013864517212,
@@ -133,7 +134,7 @@
     },
     {
       "Dynamic Profile Parent Name": "base",
-      "Guid": "418647F2-411C-4816-B7EA-712F42C629BE",
+      "Guid": "LIGHTZZZ-411C-4816-B7EA-712F42C629BE",
       "Name": "light",
       "Ansi 0 Color": {
         "Blue Component": 0.1937013864517212,
