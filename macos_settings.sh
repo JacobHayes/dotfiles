@@ -45,6 +45,7 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 defaults delete -g NSUserDictionaryReplacementItems || true
 defaults write -g AppleActionOnDoubleClick -string 'Maximize'
 defaults write -g AppleFirstWeekday -dict 'gregorian' -int 2
+defaults write -g AppleICUForce24HourTime -bool true
 defaults write -g AppleInterfaceStyle -string 'Dark'
 defaults write -g AppleLanguages -array -string 'en-US' -string 'es-US'
 defaults write -g AppleLocale -string 'en_US'
@@ -77,6 +78,7 @@ defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock mineffect -string 'scale'
 defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock pinning -string 'middle'
+defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 defaults write com.apple.dock tilesize -float 25
 # Finder
@@ -149,8 +151,10 @@ defaults -currentHost write -g com.apple.keyboard.modifiermapping.6127-24648-0 -
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>' \
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771298</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771303</integer></dict>' \
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771303</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771298</integer></dict>'
+# Enable Night Shift
+sudo /usr/libexec/PlistBuddy -c "Set :CBUser-$(dscl . -read "${HOME}" GeneratedUID | sed 's/GeneratedUID: //'):CBBlueReductionStatus:BlueReductionMode 1" /private/var/root/Library/Preferences/com.apple.CoreBrightness.plist
 
-for app in "Dock" "Finder" "SystemUIServer"; do
+for app in "Dock" "Finder" "SystemUIServer" "cfprefsd" "corebrightnessd"; do
   killall "${app}" > /dev/null 2>&1
 done
 
@@ -166,8 +170,9 @@ echo "Make sure to check out and save off filevault_recovery_key.txt. Press ente
 read -r
 
 echo "Don't forget to:"
-echo "- set ctrl-cmd-space to zoom, ctrl-option-cmd-space to invert"
+echo "- add spectacle to login apps"
 echo "- replace Spotlight shortcut with Alfred (remove system shortcut and open Alfred and set it there)"
+echo "- set ctrl-cmd-space to zoom, ctrl-option-cmd-space to invert"
 echo ""
 echo "Press enter when done..."
 read -r
