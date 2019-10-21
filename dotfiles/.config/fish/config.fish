@@ -9,6 +9,7 @@ set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
 set -x PAGER "/usr/bin/less -SR" # Don't wrap when paging, in eg: psql. Also, show color codes
 set -x PYTHONDONTWRITEBYTECODE 1
+set -x XDG_CONFIG_HOME "$HOME/.config" # Override any defaults to "$HOME/Library/Application Support"
 # Add go and brew bins to PATH
 set PATH $GOPATH/bin $PATH
 set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH

@@ -1,3 +1,3 @@
 function ll --wraps ls
-	ls -AGHohp $argv
+	ls -AHohp $argv
 end
