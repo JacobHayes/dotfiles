@@ -4,6 +4,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+open /Applications/iTerm.app
+sleep 1
+
 HERE="$(cd "$(dirname "$0")" ; pwd -P)"
 
 mkdir -p "${HOME}/Library/Application Support/iTerm2/DynamicProfiles"

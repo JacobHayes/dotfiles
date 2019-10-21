@@ -145,8 +145,10 @@ rm /tmp/system.preferences.plist
 #
 # Most of this was pulled from https://apple.stackexchange.com/a/88096, but had to use IOHIDInterface instead.
 #
-# Tnternal trackpad/keyboard, for my laptop revision at least. Mapping caps to esc
+# Mapping caps to esc for internal trackpad/keyboards:
 defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-630-0 -array \
+  '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>'
+defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-636-0 -array \
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>'
 # Bluetooth Lenovo keyboard. Mapping caps to esc and swapping alt/windows buttons to match options/command
 defaults -currentHost write -g com.apple.keyboard.modifiermapping.6127-24648-0 -array \
