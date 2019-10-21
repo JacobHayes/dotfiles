@@ -68,7 +68,7 @@ endfor
 "## Custom Options ##"
 "####################"
 
-set background=light
+set background=dark
 set clipboard=unnamed " Uses system clipboard
 set cursorline " highlight the line cursor is on
 set expandtab " use spaces
