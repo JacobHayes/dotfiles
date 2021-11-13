@@ -2,7 +2,6 @@
   a   = add
   b   = branch
   c   = commit
-  co  = checkout
   cp  = cherry-pick
   d   = diff
   dt  = difftool
@@ -10,12 +9,13 @@
   m   = merge
   pl  = pull
   ps  = push
-  r   = reset
   rb  = rebase --autostash
   rbc = rebase --continue
   rbi = rebase -i --autostash
+  rs  = restore
   s   = status
   st  = stash
+  sw  = switch
   up  = pull --rebase --autostash
   wt  = worktree
 [color]
@@ -36,6 +36,8 @@
   email = jacob.r.hayes@gmail.com
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/ # Use ssh keys, even if cloned with http
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
 [diff]
   tool = vimdiff
 [difftool]

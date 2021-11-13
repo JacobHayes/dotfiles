@@ -1,2 +1,3 @@
 set editing-mode vi
+set enable-bracketed-paste off
 set keymap vi-insert

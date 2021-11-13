@@ -35,6 +35,7 @@ Plug 'chrisbra/csv.vim' " Fancy CSV viewing
 Plug 'christoomey/vim-tmux-navigator' " use ctrl-(h/j/k/l) to seamlessly navigate vim splits or tmux panes
 Plug 'dag/vim-fish' " Add fish syntax support
 Plug 'davidhalter/jedi-vim' " python highlighting, goto, etc. Using zchee/deoplete-jedi for completion though
+Plug 'dense-analysis/ale' " async linting, etc
 Plug 'elzr/vim-json' " adds json specific highlighting (instead of just js)
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " lots of go helpers
 Plug 'kana/vim-textobj-entire' " used for vim-expand-region config
@@ -42,8 +43,10 @@ Plug 'kana/vim-textobj-indent' " used for vim-expand-region config
 Plug 'kana/vim-textobj-user'   " used for vim-expand-region config
 Plug 'majutsushi/tagbar' " Shows ctags (ex for go-to definition)
 Plug 'mbbill/undotree' " friendly view for change history
+Plug 'mgedmin/coverage-highlight.vim' " Use :HighlightCoverage to show code coverage in file
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace
 Plug 'scrooloose/nerdtree' " file explorer
+Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'terryma/vim-expand-region' " expand visual selection by repeating key hit
 Plug 'terryma/vim-multiple-cursors' " Sublime Text style multi-edit
 Plug 'tmux-plugins/vim-tmux' " tmux syntax highlighting and a few others
@@ -53,7 +56,6 @@ Plug 'tpope/vim-sensible' " some sensible vim defaults, though I think most are 
 Plug 'tpope/vim-sleuth' " Auto detect space/indent
 Plug 'tpope/vim-surround' "Surround text v(highlight)S<character>
 Plug 'vim-airline/vim-airline-themes' " Use Solarized Light theme for statusline
-Plug 'w0rp/ale' " async linting, etc
 Plug 'zchee/deoplete-go', { 'do': 'make' } " async go completion
 Plug 'zchee/deoplete-jedi' " async python completion
 
@@ -68,7 +70,26 @@ endfor
 "## Custom Options ##"
 "####################"
 
-set background=dark
+if has("mac")
+  highlight Normal ctermbg=NONE
+  function! SetBackground()
+    if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+      set background=dark
+    else
+      set background=light
+    endif
+  endfunction
+
+  call SetBackground()
+else
+  set background=dark
+endif
+
+
+" Use brew python since linters and neovim are installed
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python'
+
 set clipboard=unnamed " Uses system clipboard
 set cursorline " highlight the line cursor is on
 set expandtab " use spaces
@@ -93,7 +114,12 @@ set undofile " Store change history between file sessions
 set visualbell " don't beep, ex when hitting escape in command mode
 
 autocmd bufreadpre *.md setlocal conceallevel=0 " Don't hide syntax symbols like _
-autocmd bufreadpre *.py setlocal textwidth=88 " Match Black config
+
+if empty($PY_TEXTWIDTH)
+  autocmd bufreadpre *.py setlocal textwidth=88
+else
+  autocmd bufreadpre *.py let &l:textwidth=str2nr($PY_TEXTWIDTH)
+endif
 
 " H/L for faster ^/$
 noremap H <home>

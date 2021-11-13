@@ -7,11 +7,14 @@ set -x GO111MODULE on
 set -x GOPATH $HOME
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-set -x PAGER "/usr/bin/less -SR" # Don't wrap when paging, in eg: psql. Also, show color codes
+set -x PAGER /usr/bin/less -SR # Don't wrap when paging, in eg: psql. Also, show color codes
 set -x PYTHONDONTWRITEBYTECODE 1
-set -x XDG_CONFIG_HOME "$HOME/.config" # Override any defaults to "$HOME/Library/Application Support"
+# Add more: https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables
+set -x XDG_CACHE_HOME "$HOME/.cache" # Override defaults to "$HOME/Library/Application Support"
+set -x XDG_CONFIG_HOME "$HOME/.config" # Override defaults to "$HOME/Library/Caches"
 # Add go and brew bins to PATH
 set PATH $GOPATH/bin $PATH
+set PATH $HOME/.local/bin $PATH
 set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 set PATH /usr/local/opt/curl/bin $PATH
 set PATH /usr/local/opt/findutils/libexec/gnubin $PATH
@@ -19,6 +22,7 @@ set PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
 set PATH /usr/local/opt/gnu-tar/libexec/gnubin $PATH
 set PATH /usr/local/opt/gnu-time/libexec/gnubin $PATH
 set PATH /usr/local/opt/grep/libexec/gnubin $PATH
+set PATH /usr/local/opt/libpq/bin/ $PATH
 set PATH /usr/local/opt/make/libexec/gnubin $PATH
 set PATH /usr/local/opt/sqlite/bin $PATH
 
@@ -40,4 +44,22 @@ if test -e /usr/local/opt/fzf/shell/key-bindings.fish
     fzf_key_bindings
 end
 
-eval (direnv hook fish)
+# Support things like "direnv exec {path} fish" for long lived env mocking outside the path. We don't want to source the
+# direnv hooks because they'd _disable_ itself as we're outside the core path.
+if set -q DIRENV_IN_ENVRC
+    # The DIRENV_DIR includes a leading hyphen for some reason
+    set direnv_dir (echo $DIRENV_DIR | cut -c 2-)
+
+    functions --copy fish_prompt _fish_prompt
+    function fish_prompt
+      echo -n "["(basename $direnv_dir | tr -d '\n')"] "
+      _fish_prompt
+    end
+else
+    direnv hook fish | source
+    direnv export fish | source
+end
+
+# echo "Adding shadowsocks proxy lines"
+# set -x http_proxy "http://127.0.0.1:1087"
+# set -x https_proxy "http://127.0.0.1:1087"

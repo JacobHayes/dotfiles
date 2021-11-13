@@ -1,3 +1,5 @@
 function _set_vim
-    sed -i --follow-symlinks "s#set background=.*#set background=$argv#" ~/.config/nvim/init.vim
+    for handle in (nvr --nostart --serverlist)
+        NVIM_LISTEN_ADDRESS=$handle nvr -c 'call SetBackground()'
+    end
 end
