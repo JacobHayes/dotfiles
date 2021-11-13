@@ -4,6 +4,7 @@ flake8
 isort
 jedi
 mccabe
+neovim-remote
 pep8
 pipenv
 poetry
