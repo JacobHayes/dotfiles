@@ -6,5 +6,6 @@ set -o pipefail
 
 HERE="$(cd "$(dirname "$0")" ; pwd -P)"
 
-mkdir -p "${HOME}/Library/Application Support/Alfred 3"
-ln -fs "${HERE}/Alfred.alfredpreferences" "${HOME}/Library/Application Support/Alfred 3/"
+mkdir -p "${HOME}/Library/Application Support/Alfred/Alfred.alfredpreferences/"
+# Ignore the "remote" preferences
+ln -fs "${HERE}/preferences" "${HOME}/Library/Application Support/Alfred/Alfred.alfredpreferences/"
