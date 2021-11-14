@@ -17,6 +17,8 @@ osascript -e 'tell application "System Preferences" to quit'
 
 # Add settings for "Require admin password for system settings" from Sec&Privacy->Advanced
 
+echo "A" | softwareupdate --install-rosetta
+
 # Install fonts
 open Inconsolata/Inconsolata-Bold.ttf
 open Inconsolata/Inconsolata-Regular.ttf

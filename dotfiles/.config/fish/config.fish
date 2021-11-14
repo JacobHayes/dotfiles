@@ -7,7 +7,7 @@ set -x GO111MODULE on
 set -x GOPATH $HOME
 set -x LANG en_US.UTF-8
 set -x LC_ALL en_US.UTF-8
-set -x PAGER /usr/bin/less -SR # Don't wrap when paging, in eg: psql. Also, show color codes
+set -x PAGER /opt/homebrew/bin/less -SR # Don't wrap when paging, in eg: psql. Also, show color codes
 set -x PYTHONDONTWRITEBYTECODE 1
 # Add more: https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables
 set -x XDG_CACHE_HOME "$HOME/.cache" # Override defaults to "$HOME/Library/Application Support"
@@ -15,21 +15,22 @@ set -x XDG_CONFIG_HOME "$HOME/.config" # Override defaults to "$HOME/Library/Cac
 # Add go and brew bins to PATH
 set PATH $GOPATH/bin $PATH
 set PATH $HOME/.local/bin $PATH
-set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
-set PATH /usr/local/opt/curl/bin $PATH
-set PATH /usr/local/opt/findutils/libexec/gnubin $PATH
-set PATH /usr/local/opt/gnu-sed/libexec/gnubin $PATH
-set PATH /usr/local/opt/gnu-tar/libexec/gnubin $PATH
-set PATH /usr/local/opt/gnu-time/libexec/gnubin $PATH
-set PATH /usr/local/opt/grep/libexec/gnubin $PATH
-set PATH /usr/local/opt/libpq/bin/ $PATH
-set PATH /usr/local/opt/make/libexec/gnubin $PATH
-set PATH /usr/local/opt/sqlite/bin $PATH
+eval (/opt/homebrew/bin/brew shellenv)
+set PATH /opt/homebrew/opt/coreutils/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/curl/bin $PATH
+set PATH /opt/homebrew/opt/findutils/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/gnu-tar/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/gnu-time/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/grep/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/libpq/bin/ $PATH
+set PATH /opt/homebrew/opt/make/libexec/gnubin $PATH
+set PATH /opt/homebrew/opt/sqlite/bin $PATH
 
 set -g fish_greeting ""
 set -g fish_key_bindings fish_vi_key_bindings
 
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
 if test -e ~/.config/fish/config.override.fish
     source ~/.config/fish/config.override.fish
 end

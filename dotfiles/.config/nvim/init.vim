@@ -23,7 +23,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plug 'bling/vim-bufferline' " Show the buffers (and number) in status bar
 " Plug 'chrisbra/Recover.vim' " allow diff from existing .swp files - doesn't work well with nvim
 " Plug 'easymotion/vim-easymotion' " Need to learn more, but it's like vimium's link following
-Plug '/usr/local/opt/fzf' " Use the brew installed fzf
+Plug '/opt/homebrew/bin/fzf' " Use the brew installed fzf
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet-snippets' " actual snippets
 Plug 'Shougo/neosnippet.vim' " allows snippet completion
@@ -87,8 +87,8 @@ endif
 
 
 " Use brew python since linters and neovim are installed
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:python_host_prog = '/opt/homebrew/bin/python3'
 
 set clipboard=unnamed " Uses system clipboard
 set cursorline " highlight the line cursor is on

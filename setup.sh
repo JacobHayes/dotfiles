@@ -6,7 +6,9 @@ set -o pipefail
 
 if ! hash brew 2>/dev/null; then
     echo "Installing homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 echo "Installing brew and cask packages"
@@ -19,7 +21,6 @@ echo "Installing python packages"
 pip2 install --upgrade -r ./requirements/python-requirements.txt
 pip3 install --upgrade -r ./requirements/python-requirements.txt
 
-
 echo "Linking dotfiles to ~/"
 # Using the gnu version of cp from brew coreutils b/c it has the -s flag for symbolic links and works with directories
 gcp -srf "${PWD}"/dotfiles/.[^.]* ~/
@@ -30,13 +31,12 @@ echo "Start tmux and run 'prefix-I' to install tmux plugins... Press enter when 
 read -r
 
 echo "Changing default shell to brew's fish"
-sudo sh -c "echo '/usr/local/bin/fish' >> /etc/shells"
-chsh -s /usr/local/bin/fish
+sudo sh -c "echo '/opt/homebrew/bin/fish' >> /etc/shells"
+chsh -s /opt/homebrew/bin/fish
 
 if hash gcloud 2>/dev/null; then
-    echo 'y' | gcloud components install docker-credential-gcr
-    PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
-    docker-credential-gcr configure-docker
+    PATH="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
+    docker-credential-gcloud configure-docker
 fi
 
 ./macos_settings.sh
