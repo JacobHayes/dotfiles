@@ -27,6 +27,10 @@ set PATH /opt/homebrew/opt/libpq/bin/ $PATH
 set PATH /opt/homebrew/opt/make/libexec/gnubin $PATH
 set PATH /opt/homebrew/opt/sqlite/bin $PATH
 
+alias g="hub"
+alias ll="ls -AHohp"
+alias vim="nvim"
+
 set -g fish_greeting ""
 set -g fish_key_bindings fish_vi_key_bindings
 
