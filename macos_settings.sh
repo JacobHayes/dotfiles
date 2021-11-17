@@ -28,16 +28,12 @@ read -r
 for app in ./apps/*/; do
     "${app}"/setup.sh
 done
+
 # Set preferred macOS and app settings. Probably worth looking at what the defaults are from the new computer so we can
 # drop them here.
 #
 # Set dark mode
 osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to 1'
-# Turn on firewall
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
-# This may be handy to allow new applications through:
-#     sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /path/to/file
-#
 # Set network name
 sudo scutil --set HostName JacobHayes
 sudo scutil --set LocalHostName JacobHayes
@@ -65,8 +61,6 @@ defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write -g NSWindowResizeTime -float 0.0
 defaults write -g com.apple.springing.delay -float 0.5
 defaults write -g com.apple.trackpad.scaling -float 1.5
-# Airdrop
-defaults write com.apple.NetworkBrowser DisableAirDrop -bool YES
 # Update checks
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # Dashboard
@@ -148,9 +142,7 @@ rm /tmp/system.preferences.plist
 # Most of this was pulled from https://apple.stackexchange.com/a/88096, but had to use IOHIDInterface instead.
 #
 # Mapping caps to esc for internal trackpad/keyboards:
-defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-630-0 -array \
-  '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>'
-defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-636-0 -array \
+defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-834-0 -array \
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>'
 # Bluetooth Lenovo keyboard. Mapping caps to esc and swapping alt/windows buttons to match options/command
 defaults -currentHost write -g com.apple.keyboard.modifiermapping.6127-24648-0 -array \
@@ -165,8 +157,11 @@ sudo /usr/libexec/PlistBuddy -c "Set :CBUser-$(dscl . -read "${HOME}" GeneratedU
 HOST_UUID="$(ioreg -rd1 -c IOPlatformExpertDevice | grep -E '(UUID)' | awk '{print $3}' | tr -d \")"
 sqlite3 "${HOME}/Library/Dictionaries/CoreDataUbiquitySupport/${USER}~${HOST_UUID}/UserDictionary/local/store/UserDictionary.db" 'delete from ZUSERDICTIONARYENTRY;'
 
-for app in "Dock" "Finder" "SystemUIServer" "cfprefsd" "corebrightnessd"; do
-  killall "${app}" > /dev/null 2>&1
+for app in "Dock" "Finder" "SystemUIServer" "cfprefsd"; do
+  killall "${app}" > /dev/null
+done
+for app in "corebrightnessd"; do
+  sudo killall "${app}" > /dev/null
 done
 
 # Filevault
