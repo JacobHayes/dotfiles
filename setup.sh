@@ -6,7 +6,10 @@ set -o pipefail
 
 if ! hash brew 2>/dev/null; then
     echo "Installing homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh > /tmp/install_brew.sh
+    /bin/bash /tmp/install_brew.sh
+    # Install Intel brew as well for Intel only packages
+    arch -x86_64 /bin/bash /tmp/install_brew.sh
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
