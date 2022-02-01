@@ -1,20 +1,7 @@
 # Set a clean default PATH
-set PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
-
-set -x COPYFILE_DISABLE 1 # Turn off special handling of ._* files in tar, etc.
-set -x EDITOR 'nvim'
-set -x GO111MODULE on
-set -x GOPATH $HOME
-set -x LANG en_US.UTF-8
-set -x LC_ALL en_US.UTF-8
-set -x PAGER /opt/homebrew/bin/less -SR # Don't wrap when paging, in eg: psql. Also, show color codes
-set -x PYTHONDONTWRITEBYTECODE 1
-# Add more: https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables
-set -x XDG_CACHE_HOME "$HOME/.cache" # Override defaults to "$HOME/Library/Application Support"
-set -x XDG_CONFIG_HOME "$HOME/.config" # Override defaults to "$HOME/Library/Caches"
-# Add go and brew bins to PATH
-set PATH $GOPATH/bin $PATH
-set PATH $HOME/.local/bin $PATH
+set PATH /usr/bin /bin /usr/sbin /sbin
+# Add the Homebrew paths - Add M1 paths later so they have priority.
+eval (/usr/local/bin/brew shellenv)
 eval (/opt/homebrew/bin/brew shellenv)
 set PATH /opt/homebrew/opt/coreutils/libexec/gnubin $PATH
 set PATH /opt/homebrew/opt/curl/bin $PATH
@@ -26,10 +13,29 @@ set PATH /opt/homebrew/opt/grep/libexec/gnubin $PATH
 set PATH /opt/homebrew/opt/libpq/bin/ $PATH
 set PATH /opt/homebrew/opt/make/libexec/gnubin $PATH
 set PATH /opt/homebrew/opt/sqlite/bin $PATH
+set PATH $HOME/.local/bin $PATH
+set PATH $HOME/bin $PATH
+# Remove brew's uname symlink, which on M1 will *always* report arm64, even with `arch -x86_64 ...` [1]
+#
+# 1: https://github.com/Homebrew/homebrew-core/issues/71782
+rm -f /opt/homebrew/opt/coreutils/libexec/gnubin/uname
+
+set -x COPYFILE_DISABLE 1 # Turn off special handling of ._* files in tar, etc.
+set -x EDITOR 'nvim'
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
+set -x PAGER /opt/homebrew/bin/less -SR # Don't wrap when paging, in eg: psql. Also, show color codes
+set -x PYTHONDONTWRITEBYTECODE 1
+# Add more: https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables
+set -x XDG_CACHE_HOME "$HOME/.cache" # Override defaults to "$HOME/Library/Application Support"
+set -x XDG_CONFIG_HOME "$HOME/.config" # Override defaults to "$HOME/Library/Caches"
 
 alias g="hub"
 alias ll="ls -AHohp"
 alias vim="nvim"
+alias x86="arch -x86_64"
+alias x86bash="arch -x86_64 /bin/bash" # ignore M1 brew's bash
+alias x86brew="arch -x86_64 /usr/local/bin/brew"
 
 set -g fish_greeting ""
 set -g fish_key_bindings fish_vi_key_bindings
@@ -44,8 +50,8 @@ if not type -q fisher
     echo "Run `fisher` to install packages!"
 end
 
-if test -e /usr/local/opt/fzf/shell/key-bindings.fish
-    source /usr/local/opt/fzf/shell/key-bindings.fish
+if test -e /opt/homebrew/opt/fzf/shell/key-bindings.fish
+    source /opt/homebrew/opt/fzf/shell/key-bindings.fish
     fzf_key_bindings
 end
 
