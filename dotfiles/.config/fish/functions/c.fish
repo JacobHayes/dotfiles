@@ -2,6 +2,7 @@
 function c
   set dir (python3 -c '
 shortcuts = {
+    "arti": "~/src/github.com/artigraph/artigraph",
     "dot": "~/src/github.com/JacobHayes/dotfiles",
     "gh": "~/src/github.com",
 }
