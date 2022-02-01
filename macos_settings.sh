@@ -152,10 +152,14 @@ defaults -currentHost write -g com.apple.keyboard.modifiermapping.6127-24648-0 -
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771302</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771299</integer></dict>' \
   '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771303</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771298</integer></dict>'
 # Enable Night Shift
-sudo /usr/libexec/PlistBuddy -c "Set :CBUser-$(dscl . -read "${HOME}" GeneratedUID | sed 's/GeneratedUID: //'):CBBlueReductionStatus:BlueReductionMode 1" /private/var/root/Library/Preferences/com.apple.CoreBrightness.plist
+#
+# TODO: Not sure if this sets the schedule or not (on Monterey)
+#sudo /usr/libexec/PlistBuddy -c "Set :CBUser-$(dscl . -read "${HOME}" GeneratedUID | sed 's/GeneratedUID: //'):CBBlueReductionStatus:BlueReductionMode 1" /private/var/root/Library/Preferences/com.apple.CoreBrightness.plist
 # Remove text replacements
 HOST_UUID="$(ioreg -rd1 -c IOPlatformExpertDevice | grep -E '(UUID)' | awk '{print $3}' | tr -d \")"
-sqlite3 "${HOME}/Library/Dictionaries/CoreDataUbiquitySupport/${USER}~${HOST_UUID}/UserDictionary/local/store/UserDictionary.db" 'delete from ZUSERDICTIONARYENTRY;'
+#sqlite3 "${HOME}/Library/Dictionaries/CoreDataUbiquitySupport/${USER}~${HOST_UUID}/UserDictionary/local/store/UserDictionary.db" 'delete from ZUSERDICTIONARYENTRY;'
+
+# TODO: Handle "nap time"/app limits and stuff or will iCloud figure that out?
 
 for app in "Dock" "Finder" "SystemUIServer" "cfprefsd"; do
   killall "${app}" > /dev/null
