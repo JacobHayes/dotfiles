@@ -1,4 +1,3 @@
 function _set_iterm
-    _tmux_echo "\033]50;SetProfile=$argv\a"
-    _dark_titlebar
+    python3 (status dirname)/_set_iterm.py $argv
 end

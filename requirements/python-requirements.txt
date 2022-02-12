@@ -2,6 +2,7 @@ astroid
 black ; python_version >= '3'
 flake8
 isort
+iterm2
 jedi
 mccabe
 neovim-remote

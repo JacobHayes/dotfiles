@@ -2,6 +2,7 @@
   "Profiles": [
     {
       "Allow Title Setting": false,
+      "Disable Window Resizing": false,
       "Guid": "BASEZZZZ-14D8-4B71-B67E-31506417C2FE",
       "Initial Text": "_iterm2_hook",
       "Name": "base",
