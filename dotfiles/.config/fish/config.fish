@@ -30,7 +30,7 @@ set -x PYTHONDONTWRITEBYTECODE 1
 set -x XDG_CACHE_HOME "$HOME/.cache" # Override defaults to "$HOME/Library/Application Support"
 set -x XDG_CONFIG_HOME "$HOME/.config" # Override defaults to "$HOME/Library/Caches"
 
-alias g="hub"
+alias g="git"
 alias ll="ls -AHohp"
 alias vim="nvim"
 alias x86="arch -x86_64"
