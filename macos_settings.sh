@@ -180,7 +180,7 @@ echo "Make sure to check out and save off filevault_recovery_key.txt. Press ente
 read -r
 
 echo "Don't forget to:"
-echo "- add spectacle to login apps"
+echo "- add Rectangle to login apps"
 echo "- replace Spotlight shortcut with Alfred (remove system shortcut and open Alfred and set it there)"
 echo "- set ctrl-cmd-space to zoom, ctrl-option-cmd-space to invert"
 echo ""
