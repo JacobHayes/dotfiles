@@ -37,6 +37,7 @@ chsh -s /opt/homebrew/bin/fish
 if hash gcloud 2>/dev/null; then
     PATH="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:${PATH}"
     docker-credential-gcloud configure-docker
+    gcloud components install cloud_sql_proxy
 fi
 
 ./macos_settings.sh
