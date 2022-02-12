@@ -10,18 +10,15 @@ if ! hash brew 2>/dev/null; then
     /bin/bash /tmp/install_brew.sh
     # Install Intel brew as well for Intel only packages
     arch -x86_64 /bin/bash /tmp/install_brew.sh
-
-    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
 echo "Installing brew and cask packages"
 brew bundle --file=requirements/Brewfile
 
 echo "Updating pip"
-pip2 install --upgrade pip setuptools
 pip3 install --upgrade pip setuptools
 echo "Installing python packages"
-pip2 install --upgrade -r ./requirements/python-requirements.txt
 pip3 install --upgrade -r ./requirements/python-requirements.txt
 
 echo "Linking dotfiles to ~/"
