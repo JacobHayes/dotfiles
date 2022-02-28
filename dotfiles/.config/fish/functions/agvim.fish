@@ -1,3 +1,3 @@
 function agvim --wraps ag
-    ag $argv -l | xargs -I{} nvim {} +"/\v$argv"
+    ag -l -- $argv | xargs -I{} nvim {} +"/\v$argv"
 end
