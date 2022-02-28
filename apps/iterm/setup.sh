@@ -30,3 +30,6 @@ defaults write com.googlecode.iterm2 SUEnableAutomaticChecks -bool true
 defaults write com.googlecode.iterm2 SUFeedURL -string "https://iterm2.com/appcasts/testing.xml?shard=22"
 # Enable support for programmatic control from python
 defaults write com.googlecode.iterm2 EnableAPIServer -bool true
+# This setting doesn't seem to be set in the normal defaults (maybe because it requires a password to change?)
+echo "Start iterm and open preferences with 'CMD-,' go to General->Magic and change 'Require Automation permission' to 'Allow all apps'... Press enter when done..."
+read -r
