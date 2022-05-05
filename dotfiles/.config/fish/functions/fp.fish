@@ -1,5 +1,3 @@
 function fp
-    for file in $argv
-        echo (pwd)/"$file"
-    end
+    realpath $argv
 end

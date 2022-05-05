@@ -45,7 +45,7 @@ Plug 'majutsushi/tagbar' " Shows ctags (ex for go-to definition)
 Plug 'mbbill/undotree' " friendly view for change history
 Plug 'mgedmin/coverage-highlight.vim' " Use :HighlightCoverage to show code coverage in file
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace
-Plug 'scrooloose/nerdtree' " file explorer
+Plug 'preservim/nerdtree' " file explorer
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'terryma/vim-expand-region' " expand visual selection by repeating key hit
 Plug 'terryma/vim-multiple-cursors' " Sublime Text style multi-edit
@@ -114,6 +114,7 @@ set undofile " Store change history between file sessions
 set visualbell " don't beep, ex when hitting escape in command mode
 
 autocmd bufreadpre *.md setlocal conceallevel=0 " Don't hide syntax symbols like _
+autocmd bufreadpre *.md setlocal textwidth=0 " Don't wrap to newlines w/ gq, etc
 
 if empty($PY_TEXTWIDTH)
   autocmd bufreadpre *.py setlocal textwidth=88

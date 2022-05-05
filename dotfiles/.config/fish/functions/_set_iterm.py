@@ -5,6 +5,10 @@
 # The theme can be changed with `echo -e "\033]50;SetProfile=${theme}\a"` (requiring
 # extra escape padding if in tmux), but that will reset the font size (and change window
 # size, depending on settings).
+#
+# NOTE: This requires allowing all apps to connect in iterm, which is annoying. In
+# theory, I could request a token here, but can't quite seem to get to work.
+#     https://gitlab.com/gnachman/iterm2/-/wikis/iTerm2-Version-3.3-Security-Updates
 import iterm2
 
 THEME = "dark"
