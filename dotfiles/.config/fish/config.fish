@@ -20,6 +20,7 @@ set PATH $HOME/bin $PATH
 # 1: https://github.com/Homebrew/homebrew-core/issues/71782
 rm -f /opt/homebrew/opt/coreutils/libexec/gnubin/uname
 
+set -gx MARKPATH /Users/jacobhayes/src/github.com/JacobHayes/dotfiles/.marks
 set -x COPYFILE_DISABLE 1 # Turn off special handling of ._* files in tar, etc.
 set -x EDITOR 'nvim'
 set -x LANG en_US.UTF-8
@@ -31,7 +32,9 @@ set -x XDG_CACHE_HOME "$HOME/.cache" # Override defaults to "$HOME/Library/Appli
 set -x XDG_CONFIG_HOME "$HOME/.config" # Override defaults to "$HOME/Library/Caches"
 
 alias g="git"
+alias j="jump" # jump plugin
 alias ll="ls -AHohp"
+alias m="mark" # jump plugin
 alias vim="nvim"
 alias x86="arch -x86_64"
 alias x86bash="arch -x86_64 /bin/bash" # ignore M1 brew's bash
@@ -47,7 +50,7 @@ end
 
 if not type -q fisher
     curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-    echo "Run `fisher` to install packages!"
+    fisher install oh-my-fish/plugin-jump
 end
 
 if test -e /opt/homebrew/opt/fzf/shell/key-bindings.fish
